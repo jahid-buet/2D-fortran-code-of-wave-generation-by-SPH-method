@@ -100,8 +100,19 @@ viscosity=Orginal viscosity
 - 
 kinematic viscosity=1d-6
 -
-boundary condition=slip
--
+## boundary condition=slip
+
+# Simulation for different time instants are shown bellow:
+
+
+
+![image002](https://github.com/user-attachments/assets/0532e3aa-cd51-4728-9f56-213eb087560b)
+
+![image002](https://github.com/user-attachments/assets/79b89e9a-96b9-45c0-9037-975c8a3dd0d9)
+
+
+
+
 
 
 
