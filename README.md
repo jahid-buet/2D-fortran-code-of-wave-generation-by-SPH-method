@@ -23,7 +23,7 @@ To modify the source code one has to recompile the source files in "Source" fold
 
 - ### WaveLength.f90:  This module computes wavelength based on incident wave period and  initial water depth which is given by user in user interface.
 
-- ### KernalGradientCorrection.f90:  Compute inverse matrix related to formulation of kernal gradient correction which is used in only in viscosity(laminar+sps and artificial) computation.
+- ### KernalGradientCorrection.f90:  Compute inverse matrix related to formulation of kernal gradient correction which is used in only in laminar+sps and artificial viscosity computation.
 
 - ### Time.f90:  This module computes time step size which is used in time integration .
 
@@ -35,7 +35,7 @@ To modify the source code one has to recompile the source files in "Source" fold
 
 - ### kernal.f90:  This module computes kernel function needs for SPH simulation.Two types of kernal is implemented one is quintic spline kernal and other is wendland kernal.User can choose any one of the kernal for the simulation.
 
-- ### kgf_matrix.f90:This module computes 3 by 3 inverse matrix for kernal gradient free SPH formulation  and only used in Orginal viscosity formulation.
+- ### kgf_matrix.f90:This module computes 3 by 3 inverse matrix for kernal gradient free(KGF) SPH formulation and only used in Orginal viscosity formulation.
 
 - ### part.f90: This module define derived data types of particles and its various component.
 
