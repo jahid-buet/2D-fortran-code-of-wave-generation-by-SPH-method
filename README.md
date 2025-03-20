@@ -60,9 +60,11 @@ To modify the source code one has to recompile the source files in "Source" fold
 Here simulation results are obtained by using following parameters:
 -
 -order of wave generation=2nd order
+-
 -Target wave period=1.8s
+-
 -incident wave height=0.14m
-
+-
 - dp=0.014m
 - viscosity=laminar+sps
 - kinematic viscosity=1d-6
