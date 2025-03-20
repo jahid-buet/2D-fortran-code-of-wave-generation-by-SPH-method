@@ -17,11 +17,15 @@ To modify the source code one has to recompile the source files in "Source" fold
 - ComViscosity.f90: Compute acceleration due to vsicosity term for all fluid particles. Depending on  slip or no-slip boundary condition,viscosity for boundary particles are computed.
   Three different formulation of viscosity is implemented. Laminar+sps,artificial and orginal viscosity.User can choose any of one of the three viscosity formulation.
 
-- Dam_break.f90: Main source file from where all subroutines are called  and user interface for input parametrs are defined .Also time integration is implemented in this source file.
+- DampingZone.f90: This module computes damping function which is used  to reduce the velocity of fluid particles that enters the damping zone. Damping zone size and limit(ymmin,ymax) is given by user in user interface.
+
+- wave_generation_2d.f90:Main source file from where all subroutines are called  and user interface for input parametrs are defined .Also time integration is implemented in this source file.
+
+- WaveLength.f90:This module computes wavelength based on incident wave period and  initial water depth which is given by user in user interface.
 
 - KernalGradientCorrection.f90: Compute inverse matrix related to formulation of kernal gradient correction which is used in only in viscosity(laminar+sps and artificial) computation.
 
-- Time.f90:This module computes time step which is used in time integration  although in this  2d dam break simulation this routine is not used.
+- Time.f90:This module computes time step size which is used in time integration .
 
 - Xsph.f90:This module computes Xsph to regularize the particles movement in SPH.it is not used in this simulation.
 
@@ -40,3 +44,12 @@ To modify the source code one has to recompile the source files in "Source" fold
 - var.f90: This module is used to define initial density and compute constant mass of all particles in domain.
 
 - vector.f90:This module contains different derived data types which is used by part.f90 module.
+
+
+## Output files
+
+- before time integration start initial files named coordinate_ini.txt  is created which contains  initial position of all particles in domain.
+
+- After finished running  the simulation another  text file named coordinate_final.txt is created which contains the final position of all particles.
+
+- The initial and final text files are created within same folder as "wave_generation_2d.exe executable file.
