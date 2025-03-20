@@ -6,68 +6,70 @@ To modify the source code one has to recompile the source files in "Source" fold
 
 
 # Definition of source files are summarized as follow:
-- ComDense.f90: Compute rate of change of density of fluid particles using continuity equation and boundary particles using equation of state.
+    
+- ### ComDense.f90: Compute rate of change of density of fluid particles using continuity equation and boundary particles using equation of state.
+  
+- ### ComGravity.f90:Compute acceleration due to gravity for all fluid particles in domain.
+  
+- ### Compress.f90: Compute pressure between fluid particles by using equation of state and boundary particles by using pressure extrapolated from fluid particles.
 
-- ComGravity.f90: Compute acceleration due to gravity for all fluid particles in domain.
+- ### ComPressGrad.f90: Compute acceleration due to pressure gradient for all particles(boundary+fluid) in domain.
 
-- Compress.f90: Compute pressure between fluid particles by using equation of state and boundary particles by using pressure extrapolated from fluid particles.
+- ### ComViscosity.f90: Compute acceleration due to vsicosity term for all fluid particles. Depending on  slip or no-slip boundary condition,viscosity for boundary particles are computed. Three different formulation of viscosity is implemented. Laminar+sps,artificial and orginal viscosity.User can choose any of one of the three viscosity formulation.
 
-- ComPressGrad.f90: Compute acceleration due to pressure gradient for all particles(boundary+fluid) in domain.
+- ### DampingZone.f90: This module computes damping function which is used  to reduce the velocity of fluid particles that enters the damping zone. Damping zone size and limit(ymmin,ymax) is given by user in user interface.
 
-- ComViscosity.f90: Compute acceleration due to vsicosity term for all fluid particles. Depending on  slip or no-slip boundary condition,viscosity for boundary particles are computed.
-  Three different formulation of viscosity is implemented. Laminar+sps,artificial and orginal viscosity.User can choose any of one of the three viscosity formulation.
+- ### wave_generation_2d.f90:Main source file from where all subroutines are called  and user interface for input parametrs are defined .Also time integration is implemented in this source file.
 
-- DampingZone.f90: This module computes damping function which is used  to reduce the velocity of fluid particles that enters the damping zone. Damping zone size and limit(ymmin,ymax) is given by user in user interface.
+- ### WaveLength.f90:This module computes wavelength based on incident wave period and  initial water depth which is given by user in user interface.
 
-- wave_generation_2d.f90:Main source file from where all subroutines are called  and user interface for input parametrs are defined .Also time integration is implemented in this source file.
+- ### KernalGradientCorrection.f90: Compute inverse matrix related to formulation of kernal gradient correction which is used in only in viscosity(laminar+sps and artificial) computation.
 
-- WaveLength.f90:This module computes wavelength based on incident wave period and  initial water depth which is given by user in user interface.
+- ### Time.f90:This module computes time step size which is used in time integration .
 
-- KernalGradientCorrection.f90: Compute inverse matrix related to formulation of kernal gradient correction which is used in only in viscosity(laminar+sps and artificial) computation.
+- ### Xsph.f90:This module computes Xsph to regularize the particles movement in SPH.It is not used in this simulation.
 
-- Time.f90:This module computes time step size which is used in time integration .
+- ### geometry.f90:This module compute the required geometry(piston,flume) according to the dimensions given by user in user interface.
 
-- Xsph.f90:This module computes Xsph to regularize the particles movement in SPH.It is not used in this simulation.
+- ### initial.f90:This module is called from main source file before time initegration  and initialize variables(velocity,acceleration and pressure ) for all particles in domain.
 
-- geometry.f90:This module compute the required geometry(3 wall and 1 water column) according to the dimensions  given by user.
+- ### kernal.f90: This module computes kernel function needs for SPH simulation.Two types of kernal is implemented one is quintic spline kernal and other is wendland kernal.User can choose any one of the kernal for the simulation.
 
-- initial.f90:This module is called from main source file before time initegration  and initialize variables(velocity,acceleration and pressure ) for all particles in domain.
+- ### kgf_matrix.f90:This module computes 3 by 3 inverse matrix for kernal gradient free SPH formulation  and only used in Orginal viscosity formulation.
 
-- kernal.f90: This module computes kernel function needs for SPH simulation.Two types of kernal is implemented one is quintic spline kernal and other is wendland kernal.User can choose any one of the kernal for the simulation.
+- ### part.f90: This module define derived data types of particles and its various component.
 
-- kgf_matrix.f90:This module computes 3 by 3 inverse matrix for kernal gradient free SPH formulation  and only used in Orginal viscosity formulation.
+- ### strain.f90:This module computes strain rate for fluid particles which is used in orginal viscosity formulation(direct discretiztion of 1st and 2nd order derivatives using SPH function and then kgf matrix are used to improve the accuracy of viscosity formulation).
 
-- part.f90: This module define derived data types of particles and its various component.
+- ### var.f90: This module is used to define initial density and compute constant mass of all particles in domain.
 
-- strain.f90:This module computes strain rate for fluid particles which is used in orginal viscosity formulation(direct discretiztion of 1st and 2nd order derivatives using SPH function and then kgf matrix are used to improve the accuracy of viscosity formulation).
-
-- var.f90: This module is used to define initial density and compute constant mass of all particles in domain.
-
-- vector.f90:This module contains different derived data types which is used by part.f90 module.
-
-
-## Output files
-
-- Before time integration start initial files named coordinate_ini.txt  is created which contains only initial position of all particles in domain.
-
-- After finished running  the simulation another  text file named coordinate_final.txt is created which contains only the final positions of all particles.
-
-- The initial and final text files are created within same folder as "wave_generation_2d.exe executable file.
+- ### vector.f90:This module contains different derived data types which is used by part.f90 module.
 
 
-## Simulation results
+# Output files
 
+- ### Before time integration start initial files named coordinate_ini.txt  is created which contains only initial position of all particles in domain.
+
+- ### After finished running  the simulation another  text file named coordinate_final.txt is created which contains only the final positions of all particles.
+
+- ### The initial and final text files are created within same folder as "wave_generation_2d.exe executable file.
+
+
+# Simulation results
 Here simulation results are obtained by using following parameters:
--
--order of wave generation=2nd order
+
+order of wave generation=2nd order
 -
 -Target wave period=1.8s
 -
 -incident wave height=0.14m
 -
-- dp=0.014m
-- viscosity=laminar+sps
-- kinematic viscosity=1d-6
+dp=0.014m
+-
+viscosity=laminar+sps
+- 
+kinematic viscosity=1d-6
+-
 - slip boundary condition
 - kernal=quintic spline
 - artificial sound speed coefficient=20.0
