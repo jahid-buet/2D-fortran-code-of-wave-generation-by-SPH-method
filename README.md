@@ -27,7 +27,7 @@ To modify the source code one has to recompile the source files in "Source" fold
 
 - Time.f90:This module computes time step size which is used in time integration .
 
-- Xsph.f90:This module computes Xsph to regularize the particles movement in SPH.it is not used in this simulation.
+- Xsph.f90:This module computes Xsph to regularize the particles movement in SPH.It is not used in this simulation.
 
 - geometry.f90:This module compute the required geometry(3 wall and 1 water column) according to the dimensions  given by user.
 
@@ -48,8 +48,24 @@ To modify the source code one has to recompile the source files in "Source" fold
 
 ## Output files
 
-- before time integration start initial files named coordinate_ini.txt  is created which contains  initial position of all particles in domain.
+- Before time integration start initial files named coordinate_ini.txt  is created which contains only initial position of all particles in domain.
 
-- After finished running  the simulation another  text file named coordinate_final.txt is created which contains the final position of all particles.
+- After finished running  the simulation another  text file named coordinate_final.txt is created which contains only the final positions of all particles.
 
 - The initial and final text files are created within same folder as "wave_generation_2d.exe executable file.
+
+
+## Simulation results
+
+Here simulation results are obtained by using following parameters:
+-order of wave generation=2nd order
+-Target wave period=1.8s
+-incident wave height=0.14m
+-
+- dp=0.014m
+- viscosity=laminar+sps
+- kinematic viscosity=1d-6
+- slip boundary condition
+- kernal=quintic spline
+- artificial sound speed coefficient=20.0
+
