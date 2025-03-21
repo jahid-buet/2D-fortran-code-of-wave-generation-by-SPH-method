@@ -104,14 +104,20 @@ double precision::fl_total_length
 Ymin=0.0d0
 
 
-write(*,20)"This is a simple Fortran code of  2d regular wave generation by piston type wavemaker using SPH numerical method written by Md.Jahid Hasan,Water resources engineering,M.S.C,BUET student id-0419162024"
+write(*,20)"2d regular wave generation by piston type wavemaker using SPH numerical method copyright(c) 2025 by Md.Jahid Hasan,Water resources engineering,M.S.C,BUET student id-0419162024"
 20 format(/,2x,a)
-write(*,21)"#######################################################################################################################################################################################################"
+write(*,21)"################################################################################################################################################################################"
 21 format(2x,a)
-write(*,22)'Note:If you encounter any bug/error feel free to notify me or you can modify the source files.'
-22 format(2x,a123)
-write(*,23)"***********************************************************************************************"
-23 format(2x,a123)
+write(*,22) "This 2d fortran program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License"
+write(*,22) "as published by the Free Software Foundation either version 3 of the License, or (at your option) any later version"
+  
+write(*,22) "This program is distributed in the hope that it will be useful but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE."
+write(*,22) "See the General Public License for more details.You should have received a copy of the GNU General Public Licensealong with this program.If not, see <https://www.gnu.org/licenses/>."
+
+   
+22 format(20x,a)
+write(*,23)"########################################################################################################################################################################################"
+23 format(2x,a)
 write(*,24)"All values must be given in SI units"
 24 format(2x,a80)
 write(*,25)"*************************************************************"
