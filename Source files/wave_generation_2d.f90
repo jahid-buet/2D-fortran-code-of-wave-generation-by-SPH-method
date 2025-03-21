@@ -198,7 +198,7 @@ S0=wave_height/m1
 write(*,26)"spacing between particles(dp)=?"
 26 format(/,1x,a32)
 write(*,27)"Note:dp should be choosen in such a way that ratio of length of waveflume in x direction and dp is an integer"
-27 format(/,1x,a110)
+27 format(1x,a110)
 read(*,*) dp
 
 write(*,500)"coefficient to calculate Smoothing length(h)=?(generally h=k*dp where k is real numberand value of k=1.0-1.3 is recomended)"
@@ -319,36 +319,19 @@ write(*,180)'*****************************************************'
 
 
 
-write(*,187)"total no. of fluid particles=",ntotal_f
-187 format(/,1x,a,i7)
-write(*,188)"total no. of boundary particles=",(ntotal-ntotal_f)
-188 format(1x,a,i7)
+write(*,187)"No.of fluid particles=",ntotal_f
+187 format(/,30x,a,i7)
+write(*,188)"No.of fixed boundary particles=",(ntotal-ntotal_f-4*nz_wavemaker)
+188 format(30x,a,i5)
+write(*,430)"No.of moving boundary particles=",4*nz_wavemaker
+430 format(30x,a,i5)
 write(*,191)"total no. of particles=",ntotal
-191 format(1x,a,i7)
-write(*,182)"writing initial particles coordinate to a text file..............................."
-182 format(/,1x,a80)
-
-
-!save geometry to txt file
-open(unit=10,file='coordinate_ini.txt',action='write'&
-   ,status='replace',iostat=ierror)
-     
-    write(10,102) 'coordx','coordy','coordz'
-    102 format(1x,a12,2x,a12,2x,a12)
-   do i=1,ntotal
-    write(10,105) p(i)%coord%x(1),p(i)%coord%x(2),p(i)%coord%x(3)
-      
-    105 format(1x,f12.5,2x,f12.5,2x,f12.5)
-  end do
-
-write(*,149)"done"
-149 format(50x,a5)
-write(*,181)'*****************************************************'
-181 format(1x,a80)
+191 format(30x,a,i7)
 
 
 
-
+write(*,440)"Checking if fluid particles are too close to boundary particles or not......."
+440 format(/,1x,a)
 !checking if fluid particles are too close to boundary particles 
  do i=1,ntotal
    if(p(i)%id.eq.0)then!fluid particles
@@ -370,6 +353,31 @@ write(*,181)'*****************************************************'
        end if
          end do
 
+ write(*,442) "Done"
+ 442 format(50x,a5)
+ write(*,443)"*********************************************************"
+ 443 format(1x,a80)
+
+
+write(*,182)"writing initial particles coordinate to a text file..............................."
+182 format(/,1x,a80)
+
+!save geometry to txt file
+open(unit=10,file='coordinate_ini.txt',action='write'&
+   ,status='replace',iostat=ierror)
+     
+    write(10,102) 'coordx','coordy','coordz'
+    102 format(1x,a12,2x,a12,2x,a12)
+   do i=1,ntotal
+    write(10,105) p(i)%coord%x(1),p(i)%coord%x(2),p(i)%coord%x(3)
+      
+    105 format(1x,f12.5,2x,f12.5,2x,f12.5)
+  end do
+
+write(*,149)"done"
+149 format(50x,a5)
+write(*,181)'*****************************************************'
+181 format(1x,a80)
 
 
 write(*,150)"Assigning properties(mass,density) and initializing variables(velocity,pressure,etc)to all particles in the domain......................"
