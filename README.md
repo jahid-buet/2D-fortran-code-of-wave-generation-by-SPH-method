@@ -102,6 +102,8 @@ kinematic viscosity=1d-6
 -
 ## boundary condition=slip
 
+## option to calculate time step size=2
+
 # Simulation for different time instants are shown bellow:
 
 
