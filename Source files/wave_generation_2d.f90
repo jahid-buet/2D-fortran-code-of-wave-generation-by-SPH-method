@@ -105,9 +105,9 @@ double precision::fl_total_length
 Ymin=0.0d0
 
 
-write(*,20)"2d regular wave generation by piston type wavemaker using SPH numerical method copyright(c) 2025 by Md.Jahid Hasan,Water resources engineering,M.S.C,BUET student id-0419162024"
+write(*,20)"2d regular wave generation by piston type wavemaker using SPH numerical method copyright(c) 2025 by Md.Jahid Hasan,M.S.C at Water resources engineering,Bangladesh University of Engineering and Technology,student id-0419162024"
 20 format(/,2x,a)
-write(*,21)"################################################################################################################################################################################"
+write(*,21)"#################################################################################################################################################################################################################################"
 21 format(2x,a)
 write(*,22) "This 2d fortran program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License"
 write(*,22) "as published by the Free Software Foundation either version 3 of the License, or (at your option) any later version"
