@@ -55,6 +55,7 @@ double precision::ramp_period
 double precision::ramp_func
 character(13)::Wtype
 double precision::cff
+integer::dt_option
 
 integer::type                !type 1=laminar +sps turbulnce viscosity                                      
                              !type 2=artificial viscosity
@@ -386,14 +387,22 @@ write(*,151)"done"
 write(*,183)"**********************************************************"
 183 format(1x,a80)
 
-
+write(*,600)"choose the option to determine the time step size(dt)=?(1=value is given by the user,2=dt is automatically calculated by the program)"
+600 format(1x,a)
+read(*,*) dt_option
+ if(dt_option .eq.1)then
+  write(*,*)"Time-step size(dt)=?"
+  read(*,*) dt
+  end if 
+                                                                  
 write(*,*)"Simulation time(s)=?"
 read(*,*) simtime
 write(*,*)"At which time(s)output results(coordinates only) will be saved=?"
 read(*,*) out_time
  
-
+  if(dt_option.gt.1)then
   call timestep(1,p,ntotal,h,fl_height,coeffs,vis,dt) 
+  end if
   write(*,130)"Initial timestep size=",dt,"sec"
   130 format(1x,a28,ES12.4,a5)
   
@@ -501,9 +510,9 @@ write(*,*)"****************************************************************"
 
 
    
-   
+  if(dt_option.gt.1)then 
   call  timestep(t,p,ntotal,h,fl_height,coeffs,vis,dt)
-
+  end if
      time=(t)*dt
      
      write(*,120) t,time
@@ -605,8 +614,9 @@ write(*,*)"****************************************************************"
 
 
 
-
-  call timestep(t,p,ntotal,h,fl_height,coeffs,vis,dt)  
+  if(dt_option.gt.1)then
+  call timestep(t,p,ntotal,h,fl_height,coeffs,vis,dt) 
+  end if 
   time=t*dt
 
 
@@ -701,7 +711,7 @@ end do
     !compute position of wavemaker/piston for next timestep(n+1)
    do i=1,ntotal
      if(p(i)%id.eq.-1)then         
-       p(i)%coord%x(1)=pos_oldx(i)+pres_vel(i)%x(1)*dt                
+       p(i)%coord%x(1)=pos_oldx(i)+pres_vel(i)%x(1)*dt               
        end if
       end do
 
