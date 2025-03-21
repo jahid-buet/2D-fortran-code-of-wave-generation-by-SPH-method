@@ -329,7 +329,7 @@ write(*,182)"writing initial particles coordinate to a text file................
 
 
 !save geometry to txt file
-open(unit=10,file='C:\Users\User\Desktop\wave_generation_2d\coordinate_ini.txt',action='write'&
+open(unit=10,file='coordinate_ini.txt',action='write'&
    ,status='replace',iostat=ierror)
      
     write(10,102) 'coordx','coordy','coordz'
@@ -900,7 +900,7 @@ end do
 
 if(mod(t,out_nt).eq.0)then
   write(*,*)"writing out final position of particles in a text file......."
-open(unit=10,file='C:\Users\User\Desktop\wave_generation_2d\coordinate_final.txt',action='write'&
+open(unit=10,file='coordinate_final.txt',action='write'&
    ,status='replace',iostat=ierror)
      
     write(10,101) 'coordx','coordy','coordz'
