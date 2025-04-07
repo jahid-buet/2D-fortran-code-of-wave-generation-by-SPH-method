@@ -291,7 +291,7 @@ nz=floor(z/dp2)
 nz_wavemaker=floor(wavemaker_height/dp2)
 nx_fl=nint(fl_total_length/dp)
 nz_fl=ceiling(fl_height/dp)
-ntotal_f=(nx_fl-5)*nz_fl
+ntotal_f=(nx_fl-6)*nz_fl
 ntotal=(3*nx+3*nz+4*nz_wavemaker-9)+ntotal_f
 allocate(p(ntotal))
 allocate(vel_halfx(ntotal),vel_halfy(ntotal),pos_half_x(ntotal),pos_half_y(ntotal),stat=status,errmsg=err_msg)
@@ -332,17 +332,17 @@ write(*,191)"total no. of particles=",ntotal
 
 write(*,440)"Checking if fluid particles are too close to boundary particles or not......."
 440 format(/,1x,a)
-!checking if fluid particles are too close to boundary particles 
+!checking if fluid particles are too close to  boundary particles 
  do i=1,ntotal
    if(p(i)%id.eq.0)then!fluid particles
    do j=1,ntotal
-   if(p(i)%id*p(j)%id.lt.0)then!boundary particles
+   if(p(j)%id.lt.0)then!boundary particles
     diffx=p(i)%coord%x(1)-p(j)%coord%x(1)
     diffy=p(i)%coord%x(2)-p(j)%coord%x(2)
     diff=diffx*diffx+diffy*diffy
     diff=sqrt(diff)
     
-    if(diff.lt.0.25*dp)then
+    if(diff.lt.0.50*dp)then
       write(*,*)"Error:fluid particles are too close to boundary particles"
       write(*,*)"Press any key to exit..."
       read(*,*)
@@ -482,6 +482,7 @@ write(*,*)"****************************************************************"
 !predictor step
 
 !compute acceleration of fluid particles at n timestep
+ !if(t.gt.1)then
    if(type.eq.3)then
   call matrix(type,k_type,Xmin,Ymin,x,z,p,ntotal,h)
   end if
@@ -697,6 +698,7 @@ p(i)%coord%x(2)=2.0*p(i)%coord%x(2)-pos_oldy(i)
 end if
 end do
 
+  !end if
 
 
 !compute velocity of wavemaker/piston for next timestep(n+1)
